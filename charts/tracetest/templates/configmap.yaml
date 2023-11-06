@@ -9,8 +9,15 @@ data:
     {{- if .Values.postgresql.enabled }}
     postgres:
       host: {{ include "tracetest.postgresql.fullname" . }}
-      user: {{.Values.postgresql.auth.username}}
-      password: {{.Values.postgresql.auth.password}}
+      user: {{ .Values.postgresql.auth.username }}
+      password: {{ .Values.postgresql.auth.password }}
+      port: 5432
+      params: sslmode=disable
+    {{- else }}
+    postgres:
+      host: {{ .Values.postgresql.auth.host }}
+      user: {{ .Values.postgresql.auth.username }}
+      password: {{ .Values.postgresql.auth.password }}
       port: 5432
       params: sslmode=disable
     {{- end }}

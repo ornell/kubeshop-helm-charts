@@ -1,7 +1,6 @@
 # Section for configuring the postgres database that will be used by Tracetest
 postgresql:
-  # For now, this is required to be enabled, otherwise tracetest will not
-  # be able to function properly.
+  # To provision postgresql in your cluster set enable to true. If you have a postgresql instance ready set false and specify host under auth.
   enabled: true
   architecture: standalone
   image:
@@ -13,6 +12,8 @@ postgresql:
     username: "tracetest"
     password: not-secure-database-password
     existingSecret: ""
+  # Host is only used if postgresql.enbled is set to false
+    host: ""
 
 # Provisioning allows to define initial settings to be loaded into the database on first run. 
 # These will only be applied when running tracetest against an empty database. If tracetest has already
